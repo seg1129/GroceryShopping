@@ -6,6 +6,8 @@ import (
   "net/http"
   "database/sql"
   "encoding/json"
+  // "bytes"
+  // "io/ioutil"
   _"github.com/lib/pq"
 )
 
@@ -25,8 +27,36 @@ type Recipe struct {
   Instructions string
   Estimated_time string
   Source string
-
 }
+
+type RecipeID struct {
+  Id int
+}
+type Ingredients struct{
+  Ingredient1 string
+  Ingredient2 string
+  Ingredient3 string
+  Ingredient4 string
+  Ingredient5 string
+  Ingredient6 string
+  Ingredient7 string
+  Ingredient8 string
+  Ingredient9 string
+  Ingredient10 string
+}
+var(
+  ingredient1 string
+  ingredient2 string
+  ingredient3 string
+  ingredient4 string
+  ingredient5 string
+  ingredient6 string
+  ingredient7 string
+  ingredient8 string
+  ingredient9 string
+  ingredient10 string
+)
+
 func establishDatabaseConnection() *sql.DB{
   // check configuration of database
   db, err := sql.Open("postgres","user=postgres dbname=grocerylist sslmode=disable")
@@ -39,6 +69,23 @@ func establishDatabaseConnection() *sql.DB{
   }
   return db
 }
+func cleanArray(arr []string) []string{
+  // var length int
+  length := len(arr)
+  index := 0
+  for index < length {
+		if arr[index] == "" {
+			arr = append(arr[:index], arr[index+1:]...)
+      // cleanArray(arr)
+      length --
+      // cleanArray(arr)
+		} else {
+      index ++
+    }
+	}
+  return arr
+}
+
 func allRecipes(w http.ResponseWriter, r *http.Request){
 
   db := establishDatabaseConnection()
@@ -66,6 +113,51 @@ func allRecipes(w http.ResponseWriter, r *http.Request){
   json.NewEncoder(w).Encode(&recipes)
 }
 
+func shoppingList(w http.ResponseWriter, r *http.Request){
+  var allIngredients []string
+
+  db := establishDatabaseConnection()
+
+  //TODO: if body is empty return message
+
+  var recipeIds []RecipeID
+  err := json.NewDecoder(r.Body).Decode(&recipeIds)
+    if err != nil {
+        fmt.Fprintf(w, "please enter recipe IDs")
+    }
+  
+    // for each item in RecipeID - query database for ingredients
+    for _, elem := range recipeIds {
+
+      rows, err := db.Query(`SELECT ingredient1, ingredient2, ingredient3,
+                            ingredient4, ingredient5, ingredient6, ingredient7,
+                            ingredient8, ingredient9, ingredient10
+                            FROM recipe_simple
+                            WHERE id=$1`, elem.Id)
+
+      defer rows.Close()
+      for rows.Next() {
+
+        err = rows.Scan(&ingredient1, &ingredient2,
+                        &ingredient3, &ingredient4,
+                        &ingredient5, &ingredient6,
+                        &ingredient7, &ingredient8,
+                        &ingredient9, &ingredient10)
+        log.Println(ingredient1, ingredient2)
+        if err != nil {
+            panic(err)
+
+        }
+        allIngredients = append(allIngredients, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, ingredient8, ingredient9, ingredient10)
+    }
+  }
+  allIngredients = cleanArray(allIngredients)
+  w.Header().Set("Content-Type", "application/json")
+  json.NewEncoder(w).Encode(&allIngredients)
+
+}
+
+
 func homePage(w http.ResponseWriter, r *http.Request){
     fmt.Fprintf(w, "testing homepage")
 }
@@ -73,9 +165,8 @@ func homePage(w http.ResponseWriter, r *http.Request){
 func handleRequests(){
     http.HandleFunc("/", homePage)
     http.HandleFunc("/allRecipes", allRecipes)
+    http.HandleFunc("/shoppingList", shoppingList)
     log.Fatal(http.ListenAndServe(":8080", nil))
-
-
 }
 
 func main(){
