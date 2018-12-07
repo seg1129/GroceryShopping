@@ -85,8 +85,13 @@ func cleanArray(arr []string) []string{
 	}
   return arr
 }
+// retreived method from https://flaviocopes.com/golang-enable-cors/
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
 
 func allRecipes(w http.ResponseWriter, r *http.Request){
+  enableCors(&w)
 
   db := establishDatabaseConnection()
 
@@ -116,6 +121,7 @@ func allRecipes(w http.ResponseWriter, r *http.Request){
 func shoppingList(w http.ResponseWriter, r *http.Request){
   var allIngredients []string
 
+  enableCors(&w)
   db := establishDatabaseConnection()
 
   //TODO: if body is empty return message
@@ -125,10 +131,10 @@ func shoppingList(w http.ResponseWriter, r *http.Request){
     if err != nil {
         fmt.Fprintf(w, "please enter recipe IDs")
     }
-  
+
     // for each item in RecipeID - query database for ingredients
     for _, elem := range recipeIds {
-
+      //This is a target for sql injection
       rows, err := db.Query(`SELECT ingredient1, ingredient2, ingredient3,
                             ingredient4, ingredient5, ingredient6, ingredient7,
                             ingredient8, ingredient9, ingredient10
@@ -159,7 +165,8 @@ func shoppingList(w http.ResponseWriter, r *http.Request){
 
 
 func homePage(w http.ResponseWriter, r *http.Request){
-    fmt.Fprintf(w, "testing homepage")
+  enableCors(&w)
+  fmt.Fprintf(w, "testing homepage")
 }
 
 func handleRequests(){
