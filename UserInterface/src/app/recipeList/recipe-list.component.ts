@@ -24,7 +24,7 @@ export class RecipeListComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) {
     this.filteredRecipes = this.recipes;
-    this.recipeFilter = ' ';
+    this.recipeFilter = '';
   }
 
   filter(filterBy: string): IRecipe[] {
