@@ -24,7 +24,6 @@
             <th>Select</th>
             <th>Name</th>
             <th>Estimated Time to Complete</th>
-
           </tr>
         </thead>
         <tbody>
@@ -35,10 +34,14 @@
             <td>{{ recipe.Estimated_time }}</td>
           </tr>
         </tbody>
+        <button type="button" class="btn btn-primary">Generate Shopping list</button>
       </table>
+
     </div>
+
   </div>
 </div>
+
 <div *ngIf='errorMessage'
      class='alert alert-danger'>
   Error: {{ errorMessage }}
