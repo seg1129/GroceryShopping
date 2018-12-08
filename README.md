@@ -21,7 +21,8 @@ Everything is running on default local ports and in current state, these are not
   * Postgres is installed and set up locally using port 5432
 
 ### Setup database
-  * `pg_restore -U <username> -d grocerylist -1 groceryList.db`
+  * Create database: `createdb -T template0 grocerylist`
+  * `psql grocerylist < groceryList.db`
 
 ### Setup API
   * `go get github.com/lib/pq`
