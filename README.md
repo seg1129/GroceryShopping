@@ -1,5 +1,4 @@
 # Grocery List App
-Not ready to be graded - Setup is not working properly
 
 For CS 575 fall quarter
 
@@ -18,18 +17,22 @@ Everything is running on default local ports and in current state, these are not
 ### Requirements
   * Go is installed and GOPATH is set up
   * NPM is installed and set up
+  * you have node js version 8.9 or higher (this is needed to support angular V6)
   * Postgres is installed and set up locally using port 5432
+  * make sure ports 8080 and 4200 are not currently being used by another application
 
 ### Install Application
   * clone this repo into the GOPATH file path `git clone https://github.com/seg1129/GroceryShopping.git`
 
 
 ### Setup database
-  * `pg_restore -U <username> -d grocerylist -1 groceryList.db`
+  * Create database: `createdb -T template0 grocerylist`
+  * `psql grocerylist < groceryList.db`
 
 ### Setup API
   * `go get github.com/lib/pq`
   * go to the file path of main.go in API and use the following command: `go run main.go`
 
 ## Setup UserInterface
-  * go into UserInterface and use the following command `npm start`
+  * go into UserInterface and use the following command to install all required packages `npm install`
+  * Start application `npm start`
