@@ -1,5 +1,5 @@
 # Grocery List App
-
+Not ready to be graded - will be in the next hour
 For CS 575 fall quarter
 
 ## Features
@@ -14,6 +14,8 @@ Everything is running on default local ports and in current state, these are not
   * API: localhost:8080
   * Postgres port: 5432
 
+### Video
+[Application description YouTube Video](https://youtu.be/M9Ftq2nkXiU)
 ### Requirements
   * Go is installed and GOPATH is set up
   * NPM is installed and set up
