@@ -1,4 +1,6 @@
 # Grocery List App
+Not ready to be graded - Setup is not working properly
+
 For CS 575 fall quarter
 
 ## Features
