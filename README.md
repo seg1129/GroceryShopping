@@ -8,8 +8,12 @@ For CS 575 fall quarter
 
 ## Local setup
 There are Three components to this application: UserInterface (Angular), API (Golang), Database
+Everything is running on default local ports and in current state, these are not parameritized so here is the port information for each component:
+  * UserInterface: localhost:4200
+  * API: localhost:8080
+  * Postgres port: 5432
 
-### requirements
+### Requirements
   * Go is installed and GOPATH is set up
   * NPM is installed and set up
   * Postgres is installed and set up locally using port 5432
