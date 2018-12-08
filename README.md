@@ -15,7 +15,7 @@ Everything is running on default local ports and in current state, these are not
   * Postgres port: 5432
 
 ### Video
-[Application description YouTube Video](https://youtu.be/M9Ftq2nkXiU)
+[Application description YouTube Video](https://youtu.be/hO-WqYBmL8Y)
 ### Requirements
   * Go is installed and GOPATH is set up
   * NPM is installed and set up
@@ -36,5 +36,8 @@ Everything is running on default local ports and in current state, these are not
   * go to the file path of main.go in API and use the following command: `go run main.go`
 
 ## Setup UserInterface
+### Set up Locally
   * go into UserInterface and use the following command to install all required packages `npm install`
   * Start application `npm start`
+
+### Set up using Docker
