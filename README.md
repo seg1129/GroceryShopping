@@ -20,6 +20,10 @@ Everything is running on default local ports and in current state, these are not
   * NPM is installed and set up
   * Postgres is installed and set up locally using port 5432
 
+### Install Application
+  * clone this repo into the GOPATH file path `git clone https://github.com/seg1129/GroceryShopping.git`
+
+
 ### Setup database
   * `pg_restore -U <username> -d grocerylist -1 groceryList.db`
 
