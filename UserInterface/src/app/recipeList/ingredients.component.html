@@ -1,0 +1,24 @@
+<div class='card'>
+<div class='card-header'>
+  {{pageTitle}}
+</div>
+<div class='card-body'>
+
+  <div class='table-responsive'>
+    <table class='table'>
+      <tbody>
+        <tr *ngFor='let ingredient of ingredients'>
+          <td><input type="checkbox" aria-label="Checkbox for following text input">
+          </td>
+          <td>{{ ingredient }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div *ngIf='errorMessage'
+   class='alert alert-danger'>
+Error: {{ errorMessage }}
+</div>

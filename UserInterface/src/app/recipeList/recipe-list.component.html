@@ -1,48 +1,36 @@
-  <div class='card'>
-  <div class='card-header'>
-    {{pageTitle}}
-  </div>
-  <div class='card-body'>
-    <div class='row'>
-      <div class='col-md-2'>Filter by:</div>
-      <div class='col-md-4'>
-        <input type='text'
-               [(ngModel)]='recipeFilter' >
-      </div>
-    </div>
-    <div class='row'
-         *ngIf='recipeFilter'>
-      <div class='col-md-6'>
-        <h4>Filtered by: {{recipeFilter}}</h4>
-      </div>
-     </div>
-    <div class='table-responsive'>
-      <table class='table'
-             *ngIf='recipes && recipes.length'>
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>Name</th>
-            <th>Estimated Time to Complete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let recipe of filteredRecipes'>
-            <td><input type="checkbox" aria-label="Checkbox for following text input">
-            </td>
-            <td>{{ recipe.Name }}</td>
-            <td>{{ recipe.Estimated_time }}</td>
-          </tr>
-        </tbody>
-        <button type="button" class="btn btn-primary">Generate Shopping list</button>
-      </table>
+<div class='card'>
+<div class='card-header'>
+  {{pageTitle}}
+</div>
+<div class='card-body'>
 
-    </div>
-
+  <div class='table-responsive'>
+    <table class='table'
+           *ngIf='recipes && recipes.length'>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Estimated Time to Complete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let recipe of filteredRecipes'>
+          <td><input type="checkbox" aria-label="Checkbox for following text input">
+          </td>
+          <td>{{ recipe.Name }}</td>
+          <td>{{ recipe.Estimated_time }}</td>
+        </tr>
+      </tbody>
+      <a class='nav-link' routerLinkActive='active' [routerLink]="['/ingredients']">
+        <button type="button" class="btn btn-primary" >Generate Shopping list</button>
+      </a>
+    </table>
   </div>
+</div>
 </div>
 
 <div *ngIf='errorMessage'
-     class='alert alert-danger'>
-  Error: {{ errorMessage }}
+   class='alert alert-danger'>
+Error: {{ errorMessage }}
 </div>
