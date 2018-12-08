@@ -15,3 +15,11 @@ There are Three components to this application: UserInterface (Angular), API (Go
   * Postgres is installed and set up locally using port 5432
 
 ### Setup database
+  * `pg_restore -U <username> -d grocerylist -1 groceryList.db`
+
+### Setup API
+  * `go get github.com/lib/pq`
+  * go to the file path of main.go in API and use the following command: `go run main.go`
+
+## Setup UserInterface
+  * go into UserInterface and use the following command `npm start`
