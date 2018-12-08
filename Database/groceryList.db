@@ -1,0 +1,226 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.0
+-- Dumped by pg_dump version 11.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ing_type; Type: TABLE; Schema: public; Owner: suzanne
+--
+
+CREATE TABLE public.ing_type (
+    pk integer NOT NULL,
+    name character varying(40)
+);
+
+
+ALTER TABLE public.ing_type OWNER TO suzanne;
+
+--
+-- Name: ingredients; Type: TABLE; Schema: public; Owner: suzanne
+--
+
+CREATE TABLE public.ingredients (
+    name character varying(40),
+    type integer,
+    pk integer NOT NULL
+);
+
+
+ALTER TABLE public.ingredients OWNER TO suzanne;
+
+--
+-- Name: recipe; Type: TABLE; Schema: public; Owner: suzanne
+--
+
+CREATE TABLE public.recipe (
+    name character varying(40),
+    ingredients integer,
+    instructions text,
+    estimated_time character varying(40),
+    source character varying(40)
+);
+
+
+ALTER TABLE public.recipe OWNER TO suzanne;
+
+--
+-- Name: recipe_simple; Type: TABLE; Schema: public; Owner: suzanne
+--
+
+CREATE TABLE public.recipe_simple (
+    name character varying(40),
+    ingredient1 character varying(40),
+    ingredient2 character varying(40),
+    ingredient3 character varying(40),
+    ingredient4 character varying(40),
+    ingredient5 character varying(40),
+    ingredient6 character varying(40),
+    ingredient7 character varying(40),
+    ingredient8 character varying(40),
+    ingredient9 character varying(40),
+    ingredient10 character varying(40),
+    instructions text,
+    estimated_time character varying(40),
+    source character varying(40),
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.recipe_simple OWNER TO suzanne;
+
+--
+-- Name: recipes; Type: TABLE; Schema: public; Owner: suzanne
+--
+
+CREATE TABLE public.recipes (
+    name character varying(40),
+    ingredients integer,
+    instructions text,
+    estimated_time character varying(40),
+    source character varying(40),
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.recipes OWNER TO suzanne;
+
+--
+-- Data for Name: ing_type; Type: TABLE DATA; Schema: public; Owner: suzanne
+--
+
+COPY public.ing_type (pk, name) FROM stdin;
+1	herb
+2	vegetable
+3	meat
+4	fish
+5	cheese
+\.
+
+
+--
+-- Data for Name: ingredients; Type: TABLE DATA; Schema: public; Owner: suzanne
+--
+
+COPY public.ingredients (name, type, pk) FROM stdin;
+1lb ground beef	3	1
+1 canned corn	2	2
+1 can of refried beans	2	3
+chili powder	1	4
+cumin powder	1	5
+2 garlic cloves	1	6
+whole chicken	3	7
+1lb fingerling potatoes	2	8
+1 bag baby carrots	2	9
+1 lb chicken thin breasts	3	10
+can of tomato sauce	2	11
+Parmesan	5	12
+Mozzarella	5	13
+Italian Seasoning	1	14
+\.
+
+
+--
+-- Data for Name: recipe; Type: TABLE DATA; Schema: public; Owner: suzanne
+--
+
+COPY public.recipe (name, ingredients, instructions, estimated_time, source) FROM stdin;
+\.
+
+
+--
+-- Data for Name: recipe_simple; Type: TABLE DATA; Schema: public; Owner: suzanne
+--
+
+COPY public.recipe_simple (name, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, ingredient8, ingredient9, ingredient10, instructions, estimated_time, source, id) FROM stdin;
+whole chicken	whole chicken	fingerling potatoes	baby carrots	apple juice							1. cut fingerling potatoes in half long ways and put at the bottom of the dutch oven with the carrots. Season the chicken with your favorite seasoning and cood at 350 degrees until the internal temperature of the chicken reaches 170 degrees.2. once chicken is completed temperature, let it sit outside the oven with dutchoven lid on for 10 -15 minutes, then carve.	2 hours		1
+Tacos	1lb ground beef	can of corn	can of refried beans	chili powder	cumin	garlic	taco shells							2
+Chicken Parmesan	Chicken breasts	Parmesan cheese	mozzarella cheese	jar of pasta sauce										3
+\.
+
+
+--
+-- Data for Name: recipes; Type: TABLE DATA; Schema: public; Owner: suzanne
+--
+
+COPY public.recipes (name, ingredients, instructions, estimated_time, source, id) FROM stdin;
+Whole Chicken	7	1. cut fingerling potatoes in half long ways and put at the bottom of the dutch oven with the carrots. Season the chicken with your favorite seasoning and cood at 350 degrees until the internal temperature of the chicken reaches 170 degrees.2. once chicken is completed temperature, let it sit outside the oven with dutchoven lid on for 10 -15 minutes, then carve.			1
+Whole Chicken	8	1. cut fingerling potatoes in half long ways and put at the bottom of the dutch oven with the carrots. Season the chicken with your favorite seasoning and cood at 350 degrees until the internal temperature of the chicken reaches 170 degrees.2. once chicken is completed temperature, let it sit outside the oven with dutchoven lid on for 10 -15 minutes, then carve.			2
+\.
+
+
+--
+-- Name: ing_type ing_type_pkey; Type: CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.ing_type
+    ADD CONSTRAINT ing_type_pkey PRIMARY KEY (pk);
+
+
+--
+-- Name: ingredients ingredients_pkey; Type: CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.ingredients
+    ADD CONSTRAINT ingredients_pkey PRIMARY KEY (pk);
+
+
+--
+-- Name: recipe_simple recipe_simple_pkey; Type: CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.recipe_simple
+    ADD CONSTRAINT recipe_simple_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: recipes recipes_pkey; Type: CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.recipes
+    ADD CONSTRAINT recipes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ingredients ingredients_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.ingredients
+    ADD CONSTRAINT ingredients_type_fkey FOREIGN KEY (type) REFERENCES public.ing_type(pk);
+
+
+--
+-- Name: recipe recipe_ingredients_fkey; Type: FK CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.recipe
+    ADD CONSTRAINT recipe_ingredients_fkey FOREIGN KEY (ingredients) REFERENCES public.ingredients(pk);
+
+
+--
+-- Name: recipes recipes_ingredients_fkey; Type: FK CONSTRAINT; Schema: public; Owner: suzanne
+--
+
+ALTER TABLE ONLY public.recipes
+    ADD CONSTRAINT recipes_ingredients_fkey FOREIGN KEY (ingredients) REFERENCES public.ingredients(pk);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
