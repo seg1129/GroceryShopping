@@ -76,9 +76,7 @@ func cleanArray(arr []string) []string{
   for index < length {
 		if arr[index] == "" {
 			arr = append(arr[:index], arr[index+1:]...)
-      // cleanArray(arr)
       length --
-      // cleanArray(arr)
 		} else {
       index ++
     }
