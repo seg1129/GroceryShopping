@@ -1,5 +1,4 @@
 # Grocery List App
-Not ready to be graded - will be in the next hour
 For CS 575 fall quarter
 
 ## Features
@@ -41,3 +40,13 @@ Everything is running on default local ports and in current state, these are not
   * Start application `npm start`
 
 ### Set up using Docker
+The following steps were taken from [here](https://mherman.org/blog/dockerizing-an-angular-app/)
+
+  * go to the userInterface folder and run the following command to build the docker image. `docker build -t Grocery_List_app_ui .`
+  * Run the docker container.
+  `docker run -it \
+  -v ${PWD}:/usr/src/app \
+  -v /usr/src/app/node_modules \
+  -p 4200:4200 \
+  --rm \
+  Grocery_List_app_ui`
