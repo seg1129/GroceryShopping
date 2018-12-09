@@ -1,3 +1,5 @@
+# This file was taken from https://mherman.org/blog/dockerizing-an-angular-app/
+
 # base image
 FROM node:9.6.1
 
